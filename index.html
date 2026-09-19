@@ -1,530 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Student Result Analyzer</title>
+<title>Smart Student Result Analyzer</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
-        }
+body {
+    background: #f4f7fb;
+    color: #1f2937;
+}
 
-        header {
-            background: #263238;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
+/* Header */
+.header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 30px 20px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
 
-        header p {
-            margin-top: 8px;
-            color: #cfd8dc;
-        }
+.header p {
+    opacity: 0.9;
+}
 
-        .container {
-            max-width: 1000px;
-            margin: 25px auto;
-            padding: 0 15px;
-        }
+/* Main */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 25px 15px;
+}
 
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
+/* Dashboard */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
 
-        h2 {
-            color: #263238;
-            margin-top: 0;
-        }
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 7px 0;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 16px;
-        }
+.card h3 {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
 
-        button {
-            border: none;
-            padding: 11px 16px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-size: 15px;
-            margin-top: 10px;
-        }
+.card .number {
+    font-size: 27px;
+    font-weight: bold;
+}
 
-        .add-btn {
-            width: 100%;
-            background: #263238;
-            color: white;
-        }
+/* Sections */
+.section {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+}
 
-        .delete-btn {
-            background: #c62828;
-            color: white;
-        }
+.section h2 {
+    margin-bottom: 18px;
+    font-size: 21px;
+}
 
-        .search {
-            margin-bottom: 15px;
-        }
+/* Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
 
-        .table-box {
-            overflow-x: auto;
-        }
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    outline: none;
+}
 
-        th,
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-        }
+.input-group input:focus {
+    border-color: #6366f1;
+}
 
-        th {
-            background: #eceff1;
-        }
+/* Button */
+.btn {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
 
-        .no-data {
-            text-align: center;
-            color: #777;
-            padding: 25px;
-        }
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+}
 
-        .result-box {
-            margin-top: 15px;
-            padding: 15px;
-            background: #eceff1;
-            border-radius: 8px;
-        }
+.btn-primary:hover {
+    background: #4338ca;
+}
 
-        @media (max-width: 600px) {
+/* Search */
+.search-box {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    margin-bottom: 18px;
+}
 
-            header h1 {
-                font-size: 23px;
-            }
+/* Table */
+.table-container {
+    overflow-x: auto;
+}
 
-            .card {
-                padding: 15px;
-            }
-        }
-    </style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th, td {
+    padding: 13px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #f3f4f6;
+}
+
+.status-pass {
+    color: #15803d;
+    font-weight: bold;
+}
+
+.status-fail {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.grade {
+    font-weight: bold;
+}
+
+/* Delete button */
+.delete-btn {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* Empty */
+.empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 25px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 25px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card .number {
+        font-size: 22px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Smart Student Result Analyzer</h1>
-        <p>BCA Mini Project | HTML, CSS & JavaScript</p>
-    </header>
+<header class="header">
+    <h1>🎓 Smart Student Result Analyzer</h1>
+    <p>BCA Mini Project | HTML, CSS & JavaScript</p>
+</header>
 
+<main class="container">
 
-    <div class="container">
+    <!-- Dashboard -->
+    <div class="dashboard">
 
-        <!-- Add Student -->
         <div class="card">
-
-            <h2>➕ Add Student Result</h2>
-
-            <input
-                type="text"
-                id="rollNo"
-                placeholder="Enter Roll Number"
-            >
-
-            <input
-                type="text"
-                id="studentName"
-                placeholder="Enter Student Name"
-            >
-
-            <input
-                type="number"
-                id="maths"
-                placeholder="Mathematics Marks (0-100)"
-                min="0"
-                max="100"
-            >
-
-            <input
-                type="number"
-                id="science"
-                placeholder="Science Marks (0-100)"
-                min="0"
-                max="100"
-            >
-
-            <input
-                type="number"
-                id="computer"
-                placeholder="Computer Science Marks (0-100)"
-                min="0"
-                max="100"
-            >
-
-            <input
-                type="number"
-                id="english"
-                placeholder="English Marks (0-100)"
-                min="0"
-                max="100"
-            >
-
-            <input
-                type="number"
-                id="hindi"
-                placeholder="Hindi Marks (0-100)"
-                min="0"
-                max="100"
-            >
-
-            <button
-                class="add-btn"
-                onclick="addStudent()"
-            >
-                Add Student
-            </button>
-
+            <h3>Total Students</h3>
+            <div class="number" id="totalStudents">0</div>
         </div>
 
-
-        <!-- Search Student -->
         <div class="card">
+            <h3>Class Average</h3>
+            <div class="number" id="classAverage">0%</div>
+        </div>
 
-            <h2>🔍 Search Student</h2>
+        <div class="card">
+            <h3>Highest Percentage</h3>
+            <div class="number" id="highestPercentage">0%</div>
+        </div>
 
-            <input
-                class="search"
-                type="text"
-                id="search"
-                placeholder="Search by name or roll number"
-                oninput="displayStudents()"
-            >
-
-            <div class="table-box">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-                            <th>Roll No.</th>
-                            <th>Name</th>
-                            <th>Total</th>
-                            <th>Percentage</th>
-                            <th>Grade</th>
-                            <th>Action</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody id="studentTable">
-                    </tbody>
-
-                </table>
-
-            </div>
-
+        <div class="card">
+            <h3>Pass Students</h3>
+            <div class="number" id="passStudents">0</div>
         </div>
 
     </div>
 
+    <!-- Add Student -->
+    <section class="section">
 
-    <script>
+        <h2>➕ Add Student Result</h2>
 
-        let students =
-            JSON.parse(localStorage.getItem("resultStudents")) || [];
+        <div class="form-grid">
 
+            <div class="input-group">
+                <label>Roll Number</label>
+                <input type="text" id="roll" placeholder="Enter roll number">
+            </div>
 
-        function saveData() {
+            <div class="input-group">
+                <label>Student Name</label>
+                <input type="text" id="name" placeholder="Enter student name">
+            </div>
 
-            localStorage.setItem(
-                "resultStudents",
-                JSON.stringify(students)
-            );
+            <div class="input-group">
+                <label>Mathematics</label>
+                <input type="number" id="maths" min="0" max="100" placeholder="0 - 100">
+            </div>
 
-        }
+            <div class="input-group">
+                <label>Science</label>
+                <input type="number" id="science" min="0" max="100" placeholder="0 - 100">
+            </div>
 
+            <div class="input-group">
+                <label>Computer Science</label>
+                <input type="number" id="computer" min="0" max="100" placeholder="0 - 100">
+            </div>
 
-        function addStudent() {
+            <div class="input-group">
+                <label>English</label>
+                <input type="number" id="english" min="0" max="100" placeholder="0 - 100">
+            </div>
 
-            const roll =
-                document.getElementById("rollNo").value.trim();
+            <div class="input-group">
+                <label>Hindi</label>
+                <input type="number" id="hindi" min="0" max="100" placeholder="0 - 100">
+            </div>
 
-            const name =
-                document.getElementById("studentName").value.trim();
+        </div>
 
-            const maths =
-                Number(document.getElementById("maths").value);
+        <button class="btn btn-primary" onclick="addStudent()">
+            Add Student
+        </button>
 
-            const science =
-                Number(document.getElementById("science").value);
+    </section>
 
-            const computer =
-                Number(document.getElementById("computer").value);
+    <!-- Student Records -->
+    <section class="section">
 
-            const english =
-                Number(document.getElementById("english").value);
+        <h2>📋 Student Records</h2>
 
-            const hindi =
-                Number(document.getElementById("hindi").value);
+        <input
+            type="text"
+            id="search"
+            class="search-box"
+            placeholder="🔍 Search by name or roll number..."
+            onkeyup="displayStudents()"
+        >
 
+        <div class="table-container">
 
-            if (
-                roll === "" ||
-                name === ""
-            ) {
+            <table>
 
-                alert("Please enter Roll Number and Student Name.");
-
-                return;
-            }
-
-
-            if (
-                maths < 0 || maths > 100 ||
-                science < 0 || science > 100 ||
-                computer < 0 || computer > 100 ||
-                english < 0 || english > 100 ||
-                hindi < 0 || hindi > 100
-            ) {
-
-                alert("Please enter marks between 0 and 100.");
-
-                return;
-            }
-
-
-            const exists =
-                students.some(
-                    student => student.roll === roll
-                );
-
-
-            if (exists) {
-
-                alert("This Roll Number already exists.");
-
-                return;
-            }
-
-
-            const total =
-                maths +
-                science +
-                computer +
-                english +
-                hindi;
-
-
-            const percentage =
-                (total / 500) * 100;
-
-
-            let grade;
-
-
-            if (percentage >= 90) {
-                grade = "A+";
-            }
-            else if (percentage >= 80) {
-                grade = "A";
-            }
-            else if (percentage >= 70) {
-                grade = "B";
-            }
-            else if (percentage >= 60) {
-                grade = "C";
-            }
-            else if (percentage >= 50) {
-                grade = "D";
-            }
-            else {
-                grade = "F";
-            }
-
-
-            students.push({
-
-                roll: roll,
-
-                name: name,
-
-                total: total,
-
-                percentage: percentage.toFixed(2),
-
-                grade: grade
-
-            });
-
-
-            saveData();
-
-
-            document.getElementById("rollNo").value = "";
-
-            document.getElementById("studentName").value = "";
-
-            document.getElementById("maths").value = "";
-
-            document.getElementById("science").value = "";
-
-            document.getElementById("computer").value = "";
-
-            document.getElementById("english").value = "";
-
-            document.getElementById("hindi").value = "";
-
-
-            displayStudents();
-
-        }
-
-
-        function deleteStudent(index) {
-
-            if (
-                confirm(
-                    "Are you sure you want to delete this student?"
-                )
-            ) {
-
-                students.splice(index, 1);
-
-                saveData();
-
-                displayStudents();
-
-            }
-
-        }
-
-
-        function displayStudents() {
-
-            const table =
-                document.getElementById("studentTable");
-
-            const search =
-                document.getElementById("search")
-                .value
-                .toLowerCase();
-
-
-            table.innerHTML = "";
-
-
-            const filteredStudents =
-                students.filter(student =>
-
-                    student.roll
-                        .toLowerCase()
-                        .includes(search)
-
-                    ||
-
-                    student.name
-                        .toLowerCase()
-                        .includes(search)
-
-                );
-
-
-            if (filteredStudents.length === 0) {
-
-                table.innerHTML = `
+                <thead>
                     <tr>
-                        <td colspan="6" class="no-data">
-                            No students found
-                        </td>
+                        <th>Roll No.</th>
+                        <th>Name</th>
+                        <th>Total</th>
+                        <th>Percentage</th>
+                        <th>Grade</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
-                `;
+                </thead>
 
-                return;
-            }
+                <tbody id="studentTable"></tbody>
+
+            </table>
+
+            <div id="emptyMessage" class="empty">
+                No student records found.
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    Smart Student Result Analyzer • Developed using HTML, CSS & JavaScript
+</footer>
 
 
-            filteredStudents.forEach(student => {
+<script>
 
-                const index =
-                    students.indexOf(student);
+let students = JSON.parse(localStorage.getItem("resultStudents")) || [];
 
 
-                table.innerHTML += `
+/* Add Student */
 
-                    <tr>
+function addStudent() {
 
-                        <td>
-                            ${student.roll}
-                        </td>
+    const roll = document.getElementById("roll").value.trim();
+    const name = document.getElementById("name").value.trim();
 
-                        <td>
-                            ${student.name}
-                        </td>
+    const maths = Number(document.getElementById("maths").value);
+    const science = Number(document.getElementById("science").value);
+    const computer = Number(document.getElementById("computer").value);
+    const english = Number(document.getElementById("english").value);
+    const hindi = Number(document.getElementById("hindi").value);
 
-                        <td>
-                            ${student.total}/500
-                        </td>
+    if (!roll || !name) {
+        alert("Please enter roll number and student name.");
+        return;
+    }
 
-                        <td>
-                            ${student.percentage}%
-                        </td>
+    const marks = [maths, science, computer, english, hindi];
 
-                        <td>
-                            <strong>
-                                ${student.grade}
-                            </strong>
-                        </td>
+    if (marks.some(mark => mark < 0 || mark > 100 || isNaN(mark))) {
+        alert("Please enter valid marks between 0 and 100.");
+        return;
+    }
 
-                        <td>
+    if (students.some(student => student.roll === roll)) {
+        alert("This roll number already exists.");
+        return;
+    }
 
-                            <button
-                                class="delete-btn"
-                                onclick="deleteStudent(${index})"
-                            >
-                                Delete
-                            </button>
+    const total = maths + science + computer + english + hindi;
 
-                        </td>
+    const percentage = total / 5;
 
-                    </tr>
+    let grade;
 
-                `;
+    if (percentage >= 90) {
+        grade = "A+";
+    } else if (percentage >= 80) {
+        grade = "A";
+    } else if (percentage >= 70) {
+        grade = "B";
+    } else if (percentage >= 60) {
+        grade = "C";
+    } else if (percentage >= 50) {
+        grade = "D";
+    } else {
+        grade = "F";
+    }
 
-            });
+    const status = percentage >= 40 ? "Pass" : "Fail";
 
-        }
+    const student = {
+        roll,
+        name,
+        maths,
+        science,
+        computer,
+        english,
+        hindi,
+        total,
+        percentage,
+        grade,
+        status
+    };
 
+    students.push(student);
+
+    saveData();
+
+    clearForm();
+
+    displayStudents();
+
+    alert("Student result added successfully! 🎉");
+}
+
+
+/* Save Data */
+
+function saveData() {
+
+    localStorage.setItem(
+        "resultStudents",
+        JSON.stringify(students)
+    );
+
+}
+
+
+/* Display Students */
+
+function displayStudents() {
+
+    const table = document.getElementById("studentTable");
+    const search = document.getElementById("search").value.toLowerCase();
+
+    table.innerHTML = "";
+
+    const filteredStudents = students.filter(student =>
+        student.name.toLowerCase().includes(search) ||
+        student.roll.toLowerCase().includes(search)
+    );
+
+    document.getElementById("emptyMessage").style.display =
+        filteredStudents.length === 0 ? "block" : "none";
+
+
+    filteredStudents.forEach((student, index) => {
+
+        const originalIndex = students.indexOf(student);
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${student.roll}</td>
+
+            <td>${student.name}</td>
+
+            <td>${student.total}/500</td>
+
+            <td>${student.percentage.toFixed(2)}%</td>
+
+            <td class="grade">${student.grade}</td>
+
+            <td class="${student.status === "Pass" ? "status-pass" : "status-fail"}">
+                ${student.status}
+            </td>
+
+            <td>
+                <button class="delete-btn"
+                    onclick="deleteStudent(${originalIndex})">
+                    Delete
+                </button>
+            </td>
+        `;
+
+        table.appendChild(row);
+
+    });
+
+    updateDashboard();
+}
+
+
+/* Delete Student */
+
+function deleteStudent(index) {
+
+    if (confirm("Are you sure you want to delete this student?")) {
+
+        students.splice(index, 1);
+
+        saveData();
 
         displayStudents();
 
-    </script>
+    }
+
+}
+
+
+/* Clear Form */
+
+function clearForm() {
+
+    document.getElementById("roll").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("maths").value = "";
+    document.getElementById("science").value = "";
+    document.getElementById("computer").value = "";
+    document.getElementById("english").value = "";
+    document.getElementById("hindi").value = "";
+
+}
+
+
+/* Dashboard */
+
+function updateDashboard() {
+
+    const totalStudents = students.length;
+
+    document.getElementById("totalStudents").textContent =
+        totalStudents;
+
+
+    if (totalStudents === 0) {
+
+        document.getElementById("classAverage").textContent = "0%";
+        document.getElementById("highestPercentage").textContent = "0%";
+        document.getElementById("passStudents").textContent = "0";
+
+        return;
+    }
+
+
+    const totalPercentage = students.reduce(
+        (sum, student) => sum + student.percentage,
+        0
+    );
+
+    const average = totalPercentage / totalStudents;
+
+
+    const highest = Math.max(
+        ...students.map(student => student.percentage)
+    );
+
+
+    const passCount = students.filter(
+        student => student.status === "Pass"
+    ).length;
+
+
+    document.getElementById("classAverage").textContent =
+        average.toFixed(2) + "%";
+
+    document.getElementById("highestPercentage").textContent =
+        highest.toFixed(2) + "%";
+
+    document.getElementById("passStudents").textContent =
+        passCount;
+}
+
+
+/* Initial Load */
+
+displayStudents();
+
+</script>
 
 </body>
-
 </html>
+                    
